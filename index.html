@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mauro Berchi | Journalist · Technology Humanist</title>
+  <meta name="description" content="Mauro Berchi is a bilingual journalist, communications strategist and technology humanist covering AI, Web3, Miami and Latino communities in the U.S." />
+  <style>
+    :root {
+      --dark: #08090f;
+      --dark-2: #10111a;
+      --ink: #111118;
+      --muted: rgba(255,255,255,.62);
+      --muted-dark: #5d574e;
+      --sand: #f3efe7;
+      --card: #fffaf2;
+      --violet: #7c5cff;
+      --violet-soft: #b9a7ff;
+      --line: rgba(255,255,255,.12);
+      --line-dark: rgba(0,0,0,.1);
+      --radius: 28px;
+      --serif: Georgia, "Times New Roman", serif;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: white;
+      background: var(--dark);
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 6vw;
+      background: linear-gradient(to bottom, rgba(8,9,15,.92), rgba(8,9,15,.45), transparent);
+      backdrop-filter: blur(6px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 13px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .mark {
+      width: 42px;
+      height: 34px;
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-family: var(--serif);
+      letter-spacing: 0;
+      font-size: 17px;
+    }
+    .nav-links {
+      display: flex;
+      gap: 26px;
+      font-size: 12px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.74);
+    }
+    .nav-links a:hover { color: white; }
+
+    .hero {
+      min-height: 100vh;
+      padding: 120px 6vw 70px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 34% 42%, rgba(124,92,255,.18), transparent 32%),
+        radial-gradient(circle at 88% 18%, rgba(69,89,255,.09), transparent 34%),
+        linear-gradient(135deg, #07080d, #0b0b14 48%, #05060a);
+    }
+    .hero-grid {
+      width: 100%;
+      max-width: 1180px;
+      display: grid;
+      grid-template-columns: .9fr 1.15fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .portrait-wrap {
+      position: relative;
+      max-width: 430px;
+      justify-self: center;
+    }
+    .portrait-wrap:before {
+      content: "";
+      position: absolute;
+      inset: -42px;
+      background: rgba(124,92,255,.22);
+      filter: blur(70px);
+      border-radius: 999px;
+    }
+    .portrait {
+      position: relative;
+      overflow: hidden;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+      box-shadow: 0 40px 120px rgba(0,0,0,.5);
+      background: #11121a;
+    }
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      filter: grayscale(35%) sepia(8%) hue-rotate(210deg) saturate(115%);
+      opacity: .9;
+    }
+    .eyebrow {
+      color: var(--violet-soft);
+      text-transform: uppercase;
+      letter-spacing: .28em;
+      font-weight: 700;
+      font-size: 12px;
+      margin: 0 0 18px;
+    }
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(54px, 8vw, 92px);
+      line-height: .92;
+      letter-spacing: -.055em;
+    }
+    .subtitle {
+      margin: 18px 0 0;
+      color: var(--violet-soft);
+      font-size: clamp(17px, 2vw, 21px);
+      letter-spacing: .01em;
+    }
+    .lead {
+      margin: 30px 0 0;
+      max-width: 730px;
+      font-family: var(--serif);
+      font-size: clamp(27px, 3vw, 42px);
+      line-height: 1.12;
+      letter-spacing: -.035em;
+      color: rgba(255,255,255,.92);
+    }
+    .support {
+      margin: 22px 0 0;
+      max-width: 720px;
+      color: rgba(255,255,255,.64);
+      font-size: 16px;
+      line-height: 1.75;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .tag {
+      padding: 10px 15px;
+      border: 1px solid rgba(185,167,255,.35);
+      border-radius: 999px;
+      color: rgba(255,255,255,.75);
+      font-size: 13px;
+      background: rgba(255,255,255,.03);
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+    .btn {
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-weight: 700;
+      font-size: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .btn-primary {
+      background: var(--violet);
+      border-color: var(--violet);
+      color: white;
+      box-shadow: 0 18px 55px rgba(124,92,255,.22);
+    }
+
+    .section {
+      padding: 84px 6vw;
+    }
+    .sand {
+      background: var(--sand);
+      color: var(--ink);
+    }
+    .section-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 50px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+    .section-head h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(38px, 5vw, 64px);
+      line-height: .98;
+      letter-spacing: -.05em;
+    }
+    .section-head p {
+      color: var(--muted-dark);
+      line-height: 1.65;
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .card {
+      background: rgba(255,255,255,.76);
+      border: 1px solid var(--line-dark);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(30,24,16,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 70px rgba(30,24,16,.13);
+    }
+    .thumb {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      background: #ddd;
+    }
+    .card-body { padding: 18px 20px 22px; }
+    .outlet {
+      margin: 0;
+      color: #7056d8;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+    .card h3 {
+      margin: 10px 0 0;
+      font-size: 21px;
+      line-height: 1.16;
+      letter-spacing: -.035em;
+    }
+    .beat {
+      margin: 12px 0 0;
+      color: #7056d8;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .summary {
+      margin: 12px 0 0;
+      color: #5a554d;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+    .read {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--ink);
+      font-weight: 800;
+      font-size: 13px;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 3px;
+    }
+
+    .latina {
+      background:
+        radial-gradient(circle at 70% 12%, rgba(124,92,255,.18), transparent 32%),
+        linear-gradient(135deg, #07080d, #0c0c16);
+    }
+    .latina-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 54px;
+      align-items: center;
+    }
+    .latina h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(48px, 6vw, 78px);
+      letter-spacing: -.055em;
+    }
+    .latina p {
+      color: rgba(255,255,255,.66);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .video-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(185,167,255,.25);
+      background: rgba(255,255,255,.04);
+      min-height: 210px;
+    }
+    .video-card img {
+      width: 100%;
+      height: 100%;
+      min-height: 210px;
+      object-fit: cover;
+      opacity: .75;
+    }
+    .play {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.42);
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.28);
+    }
+    .video-copy {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+    }
+    .video-copy small {
+      color: var(--violet-soft);
+      font-weight: 800;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+    .video-copy h3 {
+      margin: 6px 0 0;
+      font-size: 17px;
+      line-height: 1.18;
+    }
+
+    .contact {
+      background: #05060a;
+      text-align: center;
+    }
+    .contact h2 {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: clamp(38px, 5vw, 62px);
+      letter-spacing: -.05em;
+      margin: 0;
+    }
+    .contact p {
+      color: rgba(255,255,255,.62);
+      max-width: 620px;
+      margin: 18px auto 0;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .nav { position: static; }
+      .nav-links { display: none; }
+      .hero { padding-top: 60px; }
+      .hero-grid, .section-head, .latina-grid { grid-template-columns: 1fr; }
+      .portrait-wrap { max-width: 360px; justify-self: start; }
+      .cards { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a href="#" class="brand" aria-label="Mauro Berchi home">
+      <span class="mark">MB</span>
+      <span>Mauro Berchi</span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#work">Work</a>
+      <a href="#latina-tech">Latina Tech</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="portrait-wrap">
+          <div class="portrait">
+            <img src="assets/hero-mauro.jpg" alt="Mauro Berchi portrait" />
+          </div>
+        </div>
+
+        <div>
+          <p class="eyebrow">Bilingual journalism · Technology · Latino communities</p>
+          <h1>Mauro Berchi</h1>
+          <p class="subtitle">Journalist. Communications strategist. Technology humanist.</p>
+
+          <p class="lead">I communicate technology because I use it, research it, study it, teach it — and now build with it.</p>
+
+          <p class="support">Since we first started talking about algorithms at the beginning of this century, I knew that without understanding them deeply, it would be impossible to understand the society I had to narrate.</p>
+
+          <p class="support">Bilingual journalist covering AI, Web3, Miami and Latino communities in the U.S. Reporting at the intersection of technology, culture, communication and everyday life.</p>
+
+          <div class="tags">
+            <span class="tag">AI</span>
+            <span class="tag">Web3</span>
+            <span class="tag">Miami</span>
+            <span class="tag">Latino communities</span>
+            <span class="tag">Culture</span>
+            <span class="tag">Video interviews</span>
+          </div>
+
+          <div class="actions">
+            <a class="btn btn-primary" href="#work">View selected work →</a>
+            <a class="btn" href="#contact">Contact / Pitch me</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section sand">
+      <div class="section-inner">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Featured Work</p>
+            <h2>Technology, power and communities.</h2>
+          </div>
+          <p>A curated selection of reporting, interviews and analysis across AI, justice, Web3, startups, Miami civic life and Latino communities in the United States.</p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <img class="thumb" src="assets/featured-ai-justice.jpg" alt="AI and justice article thumbnail" />
+            <div class="card-body">
+              <p class="outlet">El País Retina · Feature / Global analysis</p>
+              <h3>La inteligencia artificial se asoma a la justicia pero despierta dudas éticas</h3>
+              <p class="beat">AI · Justice · Ethics · Public policy</p>
+              <p class="summary">A global analysis of the first AI justice systems tested in Argentina, the U.S., China and Estonia, commissioned by El País after my early reporting on Prometea and later cited in academic work worldwide.</p>
+              <a class="read" href="https://elpais.com/retina/2020/03/03/innovacion/1583236735_793682.html" target="_blank" rel="noopener">Read article</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="thumb" src="assets/featured-ai-business.jpg" alt="Artificial intelligence business article thumbnail" />
+            <div class="card-body">
+              <p class="outlet">Ámbito · Opinion / Analysis</p>
+              <h3>El verdadero negocio de la inteligencia artificial</h3>
+              <p class="beat">AI · Big Tech · Business models · Tech ethics</p>
+              <p class="summary">A critical analysis of generative AI’s unresolved business model, connecting frontier model evaluation, Big Tech’s economic incentives and the political debate over AI development in the United States.</p>
+              <a class="read" href="https://www.ambito.com/opiniones/el-verdadero-negocio-la-inteligencia-artificial-n6258652" target="_blank" rel="noopener">Read article</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="thumb" src="assets/featured-gavin-wood.jpg" alt="Gavin Wood interview article thumbnail" />
+            <div class="card-body">
+              <p class="outlet">C5N · International interview / Field reporting</p>
+              <h3>Gavin Wood, cofundador de Ethereum: “El mundo necesita utilizar Blockchain”</h3>
+              <p class="beat">Web3 · Blockchain · Platforms · Governance</p>
+              <p class="summary">A rare interview with Gavin Wood for a non-crypto Spanish-language audience, exploring blockchain not as speculation but as a philosophical attempt to redesign trust, platforms and the social contract.</p>
+              <a class="read" href="#" target="_blank" rel="noopener">Read / Watch</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="thumb" src="assets/featured-lazo-startup.jpg" alt="Lazo startup profile article thumbnail" />
+            <div class="card-body">
+              <p class="outlet">Ámbito · Startup profile</p>
+              <h3>Creada por un argentino de Trenque Lauquen, una startup ganó u$s1 millón en Nueva York</h3>
+              <p class="beat">Startups · AI · SaaS · Latino entrepreneurship</p>
+              <p class="summary">A long-term follow-up on Lazo, from its early days to Miami and New York, portraying an immigrant founder building a real company around legal, accounting and financial needs for small businesses beyond the usual startup hype.</p>
+              <a class="read" href="https://www.ambito.com/tecnologia/creada-un-argentino-trenque-lauquen-una-startup-gano-us1-millon-nueva-york-n6135831" target="_blank" rel="noopener">Read article</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="thumb" src="assets/featured-afa-north-bay.jpg" alt="AFA North Bay Village article thumbnail" />
+            <div class="card-body">
+              <p class="outlet">C5N · Local business / public contracts reporting</p>
+              <h3>Efecto Messi: la AFA y North Bay Village invierten u$s10 millones en un centro deportivo</h3>
+              <p class="beat">Sports business · Miami · Public contracts · Latino communities</p>
+              <p class="summary">An early report on the AFA–North Bay Village project, later linked to corruption investigations, showing how Messi’s global image can blur the line between community development, football business and opaque political interests.</p>
+              <a class="read" href="#" target="_blank" rel="noopener">Read article</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img class="thumb" src="assets/featured-christi-fraga.jpg" alt="Christi Fraga political profile thumbnail" />
+            <div class="card-body">
+              <p class="outlet">C5N · Political profile / Interview</p>
+              <h3>Christi Fraga, la alcaldesa que trae oxígeno a la política de EEUU</h3>
+              <p class="beat">Local politics · Latino leadership · Miami-Dade · Civic life</p>
+              <p class="summary">A profile of Doral’s first woman mayor, the daughter of Cuban immigrants, leading a young city with new ideas in a conservative state shaped by intense debates over immigration and Latino identity.</p>
+              <a class="read" href="#" target="_blank" rel="noopener">Read article</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="latina-tech" class="section latina">
+      <div class="section-inner latina-grid">
+        <div>
+          <p class="eyebrow">TV Program</p>
+          <h2>Latina Tech</h2>
+          <p>A Spanish-language TV program from Miami exploring technology, AI and Latino-led innovation for the Latino community in the United States.</p>
+          <p>As creator and host, Mauro Berchi reports on how technology is transforming work, business, culture and everyday life — with a focus on Latino founders, innovators and communities building the future in the U.S.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#" target="_blank" rel="noopener">Watch on YouTube →</a>
+          </div>
+        </div>
+
+        <div class="video-grid">
+          <article class="video-card">
+            <img src="assets/latina-tech-episode-1.jpg" alt="Latina Tech episode thumbnail" />
+            <span class="play">▶</span>
+            <div class="video-copy">
+              <small>Episode</small>
+              <h3>Latina Tech episode title</h3>
+            </div>
+          </article>
+          <article class="video-card">
+            <img src="assets/latina-tech-episode-2.jpg" alt="Latina Tech episode thumbnail" />
+            <span class="play">▶</span>
+            <div class="video-copy">
+              <small>Episode</small>
+              <h3>Latino-led innovation</h3>
+            </div>
+          </article>
+          <article class="video-card">
+            <img src="assets/latina-tech-episode-3.jpg" alt="Latina Tech episode thumbnail" />
+            <span class="play">▶</span>
+            <div class="video-copy">
+              <small>Episode</small>
+              <h3>AI and the future of work</h3>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section sand">
+      <div class="section-inner section-head">
+        <div>
+          <p class="eyebrow">About</p>
+          <h2>A humanistic approach to technology reporting.</h2>
+        </div>
+        <p>Mauro Berchi is a bilingual journalist and communications strategist based in Miami. For more than a decade, he has investigated, used, taught and built around the technologies reshaping communication — from digital media and social platforms to AI, Web3 and AI-driven software.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="section-inner">
+        <h2>Available for reporting, interviews and editorial collaborations.</h2>
+        <p>Miami-based. Covering AI, Web3, technology, Latino-led innovation and Latino communities in the United States.</p>
+        <div class="actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:mberchillc@gmail.com">mberchillc@gmail.com</a>
+          <a class="btn" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
