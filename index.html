@@ -503,6 +503,36 @@
   letter-spacing: -.035em;
   color: var(--ink);
 }    
+  .profile-links {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.profile-links a {
+  padding: 20px;
+  border-radius: 18px;
+  border: 1px solid var(--line-dark);
+  background: rgba(255,255,255,.72);
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.25;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.profile-links a:hover {
+  transform: translateY(-3px);
+  background: white;
+}
+
+.profile-links span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted-dark);
+  font-weight: 500;
+  font-size: 14px;
+}  
 @media (max-width: 900px) {
   .once-grid {
     grid-template-columns: 1fr;
@@ -516,6 +546,7 @@
       .portrait-wrap { max-width: 360px; justify-self: start; }
       .cards { grid-template-columns: 1fr; }
       .video-grid { grid-template-columns: 1fr; }
+      .profile-links { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -795,7 +826,27 @@
   </div>
 </section>
     
+<div class="profile-links">
+  <a href="https://www.ambito.com/perfil/1000620-mauro-berchi" target="_blank" rel="noopener">
+    Ámbito
+    <span>Technology, AI, Web3, startups and business reporting.</span>
+  </a>
 
+  <a href="https://www.c5n.com/perfil/196-mauro-berchi" target="_blank" rel="noopener">
+    C5N
+    <span>Miami, tech, culture, interviews and Latino communities.</span>
+  </a>
+
+  <a href="https://www.perfil.com/buscador?q=Mauro+Berchi#gsc.tab=0&gsc.q=Mauro%20Berchi&gsc.page=1" target="_blank" rel="noopener">
+    Perfil
+    <span>Features, interviews and stories published in Perfil / El Observador.</span>
+  </a>
+
+  <a href="https://tn.com.ar/buscar/Mauro-Berchi/" target="_blank" rel="noopener">
+    TN / Todo Noticias
+    <span>Technology, AI and innovation stories published in TN.</span>
+  </a>
+</div>
     <section id="contact" class="section contact">
       <div class="section-inner">
         <h2>Available for reporting, interviews and editorial collaborations.</h2>
