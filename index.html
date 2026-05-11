@@ -482,6 +482,27 @@
   font-size: 13px;
   white-space: nowrap;
 }
+.about-grid {
+  display: grid;
+  grid-template-columns: .8fr 1.2fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.about-copy p {
+  margin: 0 0 22px;
+  color: var(--muted-dark);
+  line-height: 1.78;
+  font-size: 17px;
+}
+
+.about-copy p:first-child {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.22;
+  letter-spacing: -.035em;
+  color: var(--ink);
+}    
 @media (max-width: 900px) {
   .once-grid {
     grid-template-columns: 1fr;
@@ -491,7 +512,7 @@
       .nav { position: static; }
       .nav-links { display: none; }
       .hero { padding-top: 60px; }
-      .hero-grid, .section-head, .latina-grid { grid-template-columns: 1fr; }
+      .hero-grid, .section-head, .latina-grid, .about-grid { grid-template-columns: 1fr; }
       .portrait-wrap { max-width: 360px; justify-self: start; }
       .cards { grid-template-columns: 1fr; }
       .video-grid { grid-template-columns: 1fr; }
@@ -740,14 +761,40 @@
   </div>
 </section>
     <section id="about" class="section sand">
-      <div class="section-inner section-head">
-        <div>
-          <p class="eyebrow">About</p>
-          <h2>A humanistic approach to technology reporting.</h2>
-        </div>
-        <p>Mauro Berchi is a bilingual journalist and communications strategist based in Miami. For more than a decade, he has investigated, used, taught and built around the technologies reshaping communication — from digital media and social platforms to AI, Web3 and AI-driven software.</p>
-      </div>
-    </section>
+  <div class="section-inner about-grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2>Technology is never only technical.</h2>
+    </div>
+
+    <div class="about-copy">
+      <p>
+        In 2017, while reporting on the growing role of technology in Western politics and economics, I proposed to the editor-in-chief of Ámbito Financiero — Argentina’s leading business and finance newspaper — a new way of covering artificial intelligence: not from a purely technical perspective, but through first-person reporting, field experience and narrative journalism.
+      </p>
+
+      <p>
+        The premise was simple: to explain technology, I had to use it. Each chronicle would be built around direct experience, with an anthropological tone, because the challenge was not only to describe innovation but to make visible something that usually has no material form: software, algorithms, data systems and information-processing technologies.
+      </p>
+
+      <p>
+        We needed to tell facts in a way that could engage readers moving to mobile screens, remain clear without oversimplifying, and turn abstract systems into human stories. Software does not show itself. The technical does not automatically create interest. Storytelling became a way to make technology legible, emotional and culturally relevant.
+      </p>
+
+      <p>
+        By then, I had already founded my first digital marketing agency and completed a Master’s program in Machine Learning. Since the algorithmic disruption of the early 2010s, I had understood that these systems would transform society far beyond previous technological revolutions.
+      </p>
+
+      <p>
+        The first story written under that approach was about Prometea, the first predictive AI system developed for the justice system under high human-rights standards. From that point on, even the most technical or scientific advances I reported on were always framed around the human phenomenon being transformed by technology.
+      </p>
+
+      <p>
+        That is what I understand as technological humanism: using the tools of the humanities to interpret applied science, without becoming fascinated by technique for its own sake, but without dismissing the value that technological progress can bring. The balance comes from placing facts within a historical, cultural and human framework.
+      </p>
+    </div>
+  </div>
+</section>
+    
 
     <section id="contact" class="section contact">
       <div class="section-inner">
