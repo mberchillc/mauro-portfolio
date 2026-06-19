@@ -1,18 +1,16 @@
-# Mauro Berchi Portfolio
+# Tech & Society
 
-Static portfolio site.
+Editorial bilingual prototype built from Mauro Berchi's existing portfolio.
 
-## Replace these placeholders later
+## Current prototype
 
-- assets/hero-mauro.jpg
-- assets/featured-ai-justice.jpg
-- assets/featured-ai-business.jpg
-- assets/featured-gavin-wood.jpg
-- assets/featured-lazo-startup.jpg
-- assets/featured-afa-north-bay.jpg
-- assets/featured-christi-fraga.jpg
-- assets/latina-tech-episode-1.jpg
-- assets/latina-tech-episode-2.jpg
-- assets/latina-tech-episode-3.jpg
+- Spanish and English home pages under `/es/` and `/en/`.
+- Persistent language choice and linked translations.
+- Approved hero hierarchy and visual direction.
+- Bilingual manifesto.
+- Three initial editorial records in both languages.
+- Original portfolio assets preserved.
 
-Keep the same filenames to avoid editing the HTML.
+Open `index.html` through a local web server. The production implementation will migrate these templates to Astro and Sanity after the Sanity project and deployment credentials are available.
+
+Do not connect the final domain or change DNS until staging is approved.
