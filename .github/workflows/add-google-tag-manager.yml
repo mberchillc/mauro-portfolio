@@ -1,0 +1,77 @@
+name: Add Google Tag Manager
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  add-gtm:
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, 'Add Google Tag Manager snippet') }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Insert GTM snippets if missing
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          path = Path('index.html')
+          html = path.read_text(encoding='utf-8')
+
+          gtm_id = 'GTM-N5G2SF7M'
+          if gtm_id in html:
+              print('GTM already present; no changes needed.')
+              raise SystemExit(0)
+
+          head_snippet = '''  <!-- Google Tag Manager -->
+  <script>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-N5G2SF7M');
+  </script>
+  <!-- End Google Tag Manager -->
+'''
+
+          body_snippet = '''  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N5G2SF7M"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+'''
+
+          if '<head>\n' not in html:
+              raise SystemExit('Could not find <head> opening tag.')
+          html = html.replace('<head>\n', '<head>\n' + head_snippet, 1)
+
+          if '<body>\n' in html:
+              html = html.replace('<body>\n', '<body>\n' + body_snippet, 1)
+          elif '<body>' in html:
+              html = html.replace('<body>', '<body>\n' + body_snippet, 1)
+          else:
+              raise SystemExit('Could not find <body> opening tag.')
+
+          path.write_text(html, encoding='utf-8')
+          print('Inserted GTM snippets into index.html')
+          PY
+
+      - name: Commit GTM update
+        run: |
+          if git diff --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Add Google Tag Manager snippet"
+          git push
