@@ -1,0 +1,2 @@
+This file triggers the Google Tag Manager insertion workflow.
+It can be removed after index.html contains GTM-N5G2SF7M.
